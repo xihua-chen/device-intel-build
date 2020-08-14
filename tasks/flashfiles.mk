@@ -63,17 +63,17 @@ ifneq ($(FLASHFILE_VARIANTS),)
 	  $(if $(mvcfg_dev), $(eval mvcfg_default_arg = $(mvcfg_dev)),$(eval mvcfg_default_arg = $(MV_CONFIG_DEFAULT_TYPE)))
 	  $(hide) $(fftf) --variant=$(DEV) --mv_config_default=$(notdir $(mvcfg_default_arg)) $(BUILT_TARGET_FILES_PACKAGE) $@
   endif
+endif # Generate variant-specific files
 
 ifneq ($(TARGET_SKIP_OTA_PACKAGE), true)
   # Generate OTA fixup files
   INTEL_OTA_PACKAGES :=
-  $(foreach var,$(OTA_VARIANTS), \
-	$(info Adding $(var)) \
-	$(eval fn_prefix := $(PRODUCT_OUT)/$(TARGET_PRODUCT)) \
-	$(eval fn_suffix := $(var)-$(FILE_NAME_TAG)) \
-	$(eval ota_zip := $(fn_prefix)-ota-$(fn_suffix).zip) \
-	$(eval INTEL_OTA_PACKAGES += $(ota_zip)) \
-	$(call dist-for-goals,droidcore,$(ota_zip):$(notdir $(ota_zip))))
+  $(info Re-generating)) \
+  $(eval fn_prefix := $(PRODUCT_OUT)/$(TARGET_PRODUCT)) \
+  $(eval fn_suffix := $(FILE_NAME_TAG)) \
+  $(eval ota_zip := $(fn_prefix)-ota-$(fn_suffix).zip) \
+  $(eval INTEL_OTA_PACKAGES += $(ota_zip)) \
+  $(call dist-for-goals,droidcore,$(ota_zip):$(notdir $(ota_zip))))
 
   $(INTEL_OTA_PACKAGES): $(INTERNAL_OTA_PACKAGE_TARGET) $(BUILT_TARGET_FILES_PACKAGE) $(odf) $(DISTTOOLS)
 	$(hide) mkdir -p $(dir $@)
@@ -85,8 +85,6 @@ ifneq ($(TARGET_SKIP_OTA_PACKAGE), true)
 
   otapackage: $(INTEL_OTA_PACKAGES)
 endif
-
-endif # Generate variant-specific files
 
 #Flag for unified flashfile when variants exist
 ifneq ($(FLASHFILE_VARIANTS),)
