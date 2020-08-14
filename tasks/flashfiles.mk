@@ -73,7 +73,7 @@ ifneq ($(TARGET_SKIP_OTA_PACKAGE), true)
   $(eval fn_suffix := $(FILE_NAME_TAG)) \
   $(eval ota_zip := $(fn_prefix)-ota-$(fn_suffix).zip) \
   $(eval INTEL_OTA_PACKAGES += $(ota_zip)) \
-  $(call dist-for-goals,droidcore,$(ota_zip):$(notdir $(ota_zip))))
+  $(call dist-for-goals,droidcore,$(ota_zip):$(notdir $(ota_zip)))
 
   $(INTEL_OTA_PACKAGES): $(INTERNAL_OTA_PACKAGE_TARGET) $(BUILT_TARGET_FILES_PACKAGE) $(odf) $(DISTTOOLS)
 	$(hide) mkdir -p $(dir $@)
