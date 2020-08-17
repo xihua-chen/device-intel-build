@@ -71,7 +71,7 @@ ifneq ($(TARGET_SKIP_OTA_PACKAGE), true)
   $(info Re-generating) \
   $(eval fn_prefix := $(PRODUCT_OUT)/$(TARGET_PRODUCT)) \
   $(eval fn_suffix := $(FILE_NAME_TAG)) \
-  $(eval ota_zip := $(fn_prefix)-ota-$(fn_suffix).zip) \
+  $(eval ota_zip := $(fn_prefix)-ota-$(fn_suffix)-new.zip) \
   $(eval INTEL_OTA_PACKAGES += $(ota_zip)) \
   $(call dist-for-goals,droidcore,$(ota_zip):$(notdir $(ota_zip)))
 
